@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Steven Yan">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="Painting/master.css">
+	<title>Painting App</title>
+</head>
+
+<body style="margin: 0;">
+	 <div id="toolbar">
+	 	<div id="lineWidth">
+	 		LineWidth <span id="lenval">10</span>
+	 		<div id="dlen" class="lencontrol">-</div>
+	 		<div id="ilen" class="lencontrol">+</div>
+	 	</div>
+	 	<div class="btn-group">
+	 		<button type="button" class="btn btn-primary" id="save">Save</button>
+	 		<iframe id="download" hidden="yes"></iframe>
+		    <button type="button" class="btn btn-primary" id="clear">Clear Page</button>
+		    <button type="button" class="btn btn-primary" id="undo">Undo</button>
+		    <button type="button" class="btn btn-primary" id="rectangle">Rectangle</button>
+		    <button type="button" class="btn btn-primary" id="circle">Circle</button> 
+		    <button type="button" class="btn btn-primary" id="brush">Brush</button>
+		    <button type="button" class="btn btn-primary" id="line">Line</button>
+		    <button type="button" class="btn btn-primary" id="eraser">Eraser</button>
+ 	 	</div>
+	 	<div id ="colors"></div>
+	 </div>
+	
+	 
+	 <canvas id="myCanvas" style="display: block">
+	 Your browser does not support the HTML5 canvas tag.</canvas>
+	 
+	 <script src="Painting/drawing.js"></script>
+	 <script src="Painting/shapes.js"></script>
+	 <script src="Painting/length.js"></script>
+	 <script src="Painting/colors.js"></script>
+	 <script src="Painting/save.js"></script>
+</body>
+</html>
