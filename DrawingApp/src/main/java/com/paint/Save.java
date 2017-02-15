@@ -21,7 +21,7 @@ import sun.misc.BASE64Decoder;
 /**
  * Save images on the server machine , outside of web app root directory
  */
-@SuppressWarnings("restriction")
+
 @WebServlet("/saveImage")
 public class Save extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -48,26 +48,33 @@ public class Save extends HttpServlet {
 	{
 		 //abstract image data 
 		 data=request.getParameter("img");
-		 data=data.replace("data:image/png;base64,","");
-		 data=data.replace(" ", "+");
-		 
-		 //construct image, turn string into base64 byte code  
-		 byte[] imgByte;
-		BASE64Decoder decoder = new BASE64Decoder();
-		 imgByte = decoder.decodeBuffer(data);
-		 ByteArrayInputStream bis = new ByteArrayInputStream(imgByte);
-		 image = ImageIO.read(bis);
-		 bis.close();
-		 
-		 //create the images base on current directory 
-		 path=directory+ "/"+ UUID.randomUUID()+".png";
-		 File file = new File(path);
-		 ImageIO.write(image, "png", file);
-		 
-	     PrintWriter out = response.getWriter();
-	     out.println(path);
-
-	}
+		 if (data != null){
+			 data=data.replace("data:image/png;base64,","");
+			 data=data.replace(" ", "+");
+			 
+			 //construct image, turn string into base64 byte code  
+			 byte[] imgByte;
+			 BASE64Decoder decoder = new BASE64Decoder();
+			 imgByte = decoder.decodeBuffer(data);
+			 ByteArrayInputStream bis = new ByteArrayInputStream(imgByte);
+			 image = ImageIO.read(bis);
+			 bis.close();
+			 
+			 //create the images base on current directory 
+			 path=directory+ "/"+ UUID.randomUUID()+".png";
+			 File file = new File(path);
+			 ImageIO.write(image, "png", file);
+			 
+		     PrintWriter out = response.getWriter();
+		     out.println(path);
+		     }
+		 else {
+			 PrintWriter out = response.getWriter();
+		     out.println("<html><body><h1>");
+		     out.println("ERROR");
+		     out.println("</h1></body></html>");
+		     }
+		 }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 				throws ServletException, IOException {

@@ -15,11 +15,11 @@ saveButton.addEventListener('click',function(){
 			//window.open("http://localhost:8080/SaveButton/ImageDisplay?filepath="+fileLocation,
 						//"_blank","location=0, menubar=0");
 			document.getElementById("download").src = 
-				"http://localhost:8080/DrawingApp/ImageDisplay?filepath="+fileLocation;
+				"ImageDisplay?filepath="+fileLocation;
 		}
 	}
 	//change url when deploy into a different server 
-	request.open('POST', 'http://localhost:8080/DrawingApp/saveImage',true);
+	request.open('POST', 'saveImage',true);
 	request.setRequestHeader ('Content-type', 'application/x-www-form-urlencoded'); 
 	request.send("img="+data);
 	 
