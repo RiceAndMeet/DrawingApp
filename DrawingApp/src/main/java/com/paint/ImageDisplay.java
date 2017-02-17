@@ -20,9 +20,10 @@ public class ImageDisplay extends HttpServlet {
 		 //send response to the server 
 		 String filepath = request.getParameter("filepath");
 		if (filepath != null){	
-		 	FileInputStream file = new FileInputStream(filepath);
+			 String rootdir=request.getServletContext().getRealPath("/");
+		 	 FileInputStream file = new FileInputStream(rootdir+filepath);
 			 response.setContentType("image/png");
-			 response.addHeader("Content-Disposition", "attachment; filename=canvasoutput.png");
+			 response.addHeader("Content-Disposition", "attachment; filename="+filepath.substring(6));
 			 
 			 BufferedInputStream in = new BufferedInputStream(file);
 			 BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
