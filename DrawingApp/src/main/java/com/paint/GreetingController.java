@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sun.misc.BASE64Decoder;
 
+@SuppressWarnings("restriction")
 @RestController
 public class GreetingController{
 
     @Autowired
     ServletContext servletContext;
     
-    @SuppressWarnings("restriction")
-	@RequestMapping(value ="/greeting", method= RequestMethod.POST)
+    @RequestMapping(value ="/greeting", method= RequestMethod.POST)
     public String greeting(@RequestParam(value="img") String data){
     	if (data != null){
 	    	data=data.replace("data:image/png;base64,","");
