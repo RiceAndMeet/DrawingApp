@@ -96,27 +96,27 @@ c.addEventListener("mousemove",function(event){
 });
 
 //event listener for buttons 
-document.getElementById("clear").addEventListener("click",function(){
+$('#clear').on('click', function (e){
 	ctx.clearRect(0,0,c.width,c.height);
 	shapes.splice(0,shapes.length);
 });
-document.getElementById("undo").addEventListener("click",function(){
+$('#undo').on('click', function (e) {
 	shapes.pop();
 	repaint();
 });
-document.getElementById("rectangle").addEventListener("click",function(){
+$('#rectangle').on('click', function (e) {
 	selected="rectangle";
 });
-document.getElementById("circle").addEventListener("click",function(){
+$('#circle').on('click', function (e) {
 	selected="circle";
 });
-document.getElementById("brush").addEventListener("click",function(){
+$('#brush').on('click', function (e) {
 	selected="brush";
 });
-document.getElementById("line").addEventListener("click",function(){
+$('#line').on('click', function (e) {
 	selected="line";
 });
-document.getElementById("eraser").addEventListener("click",function(){
+$('#eraser').on('click', function (e) {
 	selected="eraser";
 });
 

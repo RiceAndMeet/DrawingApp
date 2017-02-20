@@ -69,6 +69,18 @@ function Line (point1,point2,width,color){
 	}
 }
 
+//constructor for images
+function CanvasImage(x,y,src){
+	this.x = x;
+	this.y = y;
+	this.src = src;
+    var image = new Image();
+	image.src = this.src;
+	this.paint=function(context){
+		context.drawImage(image,x,y);
+	}
+}
+
 //painting method
 function repaint(){
 	ctx.clearRect(0,0,c.width,c.height);
