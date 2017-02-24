@@ -3,7 +3,7 @@
  */
 
 var selectedFile = document.getElementById('imageInput');
-
+var image;
 /*
  *  not supported for older browsers 
  */
@@ -12,8 +12,8 @@ selectedFile.onchange = function(event){
 	if(FileReader && files && files.length){
 		var fr = new FileReader();
 		fr.onload = function(){
-			shapes.push(new CanvasImage(0,50,fr.result));
-			console.log(shapes)
+			image = new CanvasImage(0,50,300,200,fr.result);
+			//shapes.push(selector);
 			repaint();
 		}
 		fr.readAsDataURL(files[0]);

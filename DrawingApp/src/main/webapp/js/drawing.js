@@ -6,10 +6,11 @@
 var initial_x,initial_y;
 var selected = "brush";
 var dragged;//boolean switch 
-var selector;//Object shape, the draggable and moveable shape 
+var selector; //Object shape, the draggable and moveable shape 
 var shapes =new Array(); // storage for all shapes  
 var lineLength=10; // integer value for line width of drawing
 var shapeColor; 
+
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -26,10 +27,11 @@ c.addEventListener("mousedown",function(event){
 
 c.addEventListener("mouseup",function(event){
 	dragged=false;
-	if (selected !="eraser"){
+	if (selected !="eraser" && selected !="image"){
 		shapes.push(selector);
 		selector=null;
 	}
+	
 	repaint();
 
 });
@@ -84,12 +86,23 @@ c.addEventListener("mousemove",function(event){
 			selector = new Line(point1,point2,lineWidth,color);	
 		}
 		if (selected =="eraser"){
-			var width= 10;
-			var length= 10;
-			var lineWidth = 1;
-			var erase = new Rectangle (x-width/2, y-length/2, width, length, "white", lineWidth, true);
-			shapes.push(erase);
+			var width= 10,
+				length= 10;
+			var radius= width/2;
+			var color = "#F0F0F0";
+			var point1 = new Circle (initial_x,initial_y,radius,color,borderWidth,true);
+			var point2 = new Circle (x,y,radius,color,borderWidth,true);
+			selector=new Rectangle (x-width/2,y-length/2,width,length,"#000000",borderWidth,false);
+			shapes.push(new Line (point1,point2,width,color));
+			initial_x =x ;
+			initial_y =y;
 		}
+		if (selected == "image"){
+			var width = image.width;
+			var length = image.length;
+			image=new CanvasImage(x-width/2,y-length/2,width,length,image.src);
+		}	
+			
 		repaint();
 	}
 	
@@ -99,6 +112,7 @@ c.addEventListener("mousemove",function(event){
 $('#clear').on('click', function (e){
 	ctx.clearRect(0,0,c.width,c.height);
 	shapes.splice(0,shapes.length);
+	image =null;
 });
 $('#undo').on('click', function (e) {
 	shapes.pop();
@@ -119,5 +133,7 @@ $('#line').on('click', function (e) {
 $('#eraser').on('click', function (e) {
 	selected="eraser";
 });
-
+$ ('#imageInput').on('click',function (e){
+	selected= "image";
+})
 

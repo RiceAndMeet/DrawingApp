@@ -13,9 +13,9 @@ function Rectangle(x,y,width,height,color,lineWidth,eraseOn){
 	 this.paint = function (context){
 		 context.lineWidth= this.lineWidth;
 		 if (eraseOn){
-			 context.fillStyle = "white";
+			 context.fillStyle = "#F0F0F0";
 			 context.fillRect(this.x,this.y,this.width,this.height);
-			 context.strokeStyle = "white";
+			 context.strokeStyle = "black";
 			 context.strokeRect(this.x,this.y,this.width,this.height);
 		 }
 		 else{
@@ -70,14 +70,16 @@ function Line (point1,point2,width,color){
 }
 
 //constructor for images
-function CanvasImage(x,y,src){
+function CanvasImage(x,y,width,length,src){
 	this.x = x;
 	this.y = y;
+	this.width=width;
+	this.length=length;
 	this.src = src;
     var image = new Image();
 	image.src = this.src;
 	this.paint=function(context){
-		context.drawImage(image,x,y);
+		context.drawImage(image,x,y,width,length);
 	}
 }
 
@@ -86,12 +88,18 @@ function repaint(){
 	ctx.clearRect(0,0,c.width,c.height);
 	var count;
 	var rec;
+	
+	if (image != null){
+		image.paint(ctx);
+	}
+	
 	for (count=0; count<shapes.length;++count){
 		rec=shapes[count];
 		if (rec != null){
 			rec.paint(ctx);}
 	}
+	
 	if (selector != null){
 		selector.paint(ctx);}
-	
+
 }
