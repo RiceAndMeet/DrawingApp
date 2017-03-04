@@ -9,10 +9,12 @@ saveButton.addEventListener('click',function(){
 	
 	request.onreadystatechange=function (){
 		if (request.readyState == 4 && request.status == 200){
-			//where the image is stored in server 
-			var fileLocation = request.responseText;
+			var json = JSON.parse(request.response);
+			var imageLocation= json.imageLocation;
 			document.getElementById("download").src = 
-				"ImageDisplay?filepath="+fileLocation;
+			"ImageDisplay?filepath="+imageLocation;
+			
+			console.log(json);
 			
 		}
 	}

@@ -23,10 +23,12 @@ import sun.misc.BASE64Decoder;
 public class GreetingController{
 
     @Autowired
-    ServletContext servletContext;
+    private ServletContext servletContext;
+    @Autowired
+    private UserDAO userDao;
     
     @RequestMapping(value ="/greeting", method= RequestMethod.POST)
-    public String greeting(@RequestParam(value="img") String data){
+    public Image greeting(@RequestParam(value="img") String data){
     	if (data != null){
 	    	data=data.replace("data:image/png;base64,","");
 			data=data.replace(" ", "+");
@@ -35,37 +37,40 @@ public class GreetingController{
 			BASE64Decoder decoder = new BASE64Decoder();
 			try {
 				imgByte = decoder.decodeBuffer(data);
-			} catch (IOException e) {
-				return "Bad Image";
-			}
+			} catch (IOException e) { System.out.println("Bad Image"); return null;}
+			
 			ByteArrayInputStream bis = new ByteArrayInputStream(imgByte);
 			BufferedImage image;
 			try {
 				image = ImageIO.read(bis);
-			} catch (IOException e1) {
-				return "Can't Read image";
-			}
+			} catch (IOException e1) {System.out.println("Can't Read image"); return null;}
+			
 			try {
 				bis.close();
-			} catch (IOException e1) {
-				return "Can't Close the file Stream";
-			}
-		
+			} catch (IOException e1) {System.out.println( "Can't Close the file Stream"); return null;}
+			
+			 //setting up the path 
 			 String realPath = servletContext.getRealPath("/");
 			 String imageName="images/"+UUID.randomUUID()+".png";
 			 File file = new File(realPath+imageName);
 			 
-			 try {
+			 // Insert image info into database 
+			java.util.Date dateobj = new java.util.Date();
+			java.sql.Date sqlDate = new java.sql.Date (dateobj.getTime());
+			 Image database_image = new Image (imageName,sqlDate);
+			 userDao.save(database_image);
+			 
+			try {
 				ImageIO.write(image, "png", file);
-			} catch (IOException e) {
-					return "Problem Writing Image file";
-			}
+			} catch (IOException e) {System.out.println("Problem Writing Image file"); return null;}
 
-			 return imageName; 
+			return database_image; 
     	} 
     	else {
-    		return "Image Data NULL";
+    		System.out.println( "Image Data NULL");
+    		return null;
     	}
+
     }
     
     
