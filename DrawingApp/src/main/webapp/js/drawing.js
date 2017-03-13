@@ -31,8 +31,8 @@ c.addEventListener("mouseup",function(event){
 		shapes.push(selector);
 		selector=null;
 	}
+    repaint();
 	
-	repaint();
 
 });
 
@@ -57,12 +57,16 @@ c.addEventListener("mousemove",function(event){
 		if (selected == "rectangle"){
 			var color = shapeColor;
 			var borderWidth = lineLength;
-			selector = new Rectangle (initial_x,initial_y,x-initial_x,y-initial_y,color, borderWidth, false);	
+			selector = new Rectangle (initial_x,initial_y,x-initial_x,y-initial_y,color, borderWidth, false);
+			if($("#connect").attr("disabled")=='disabled')
+				send(selector);
 		}
 		if (selected == "circle"){	
 			var color = shapeColor;
 			var borderWidth = lineLength;
-			selector = new Circle(initial_x,initial_y,Math.abs(x-initial_x),color,borderWidth,false);			
+			selector = new Circle(initial_x,initial_y,Math.abs(x-initial_x),color,borderWidth,false);	
+			if($("#connect").attr("disabled")=='disabled')
+				send(selector);
 		}
 		if (selected == "brush"){
 			var lineWidth = lineLength;

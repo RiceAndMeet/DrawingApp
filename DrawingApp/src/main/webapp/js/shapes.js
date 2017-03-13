@@ -10,6 +10,7 @@ function Rectangle(x,y,width,height,color,lineWidth,eraseOn){
 	 this.width=width;
 	 this.color=color;
 	 this.lineWidth=lineWidth;
+	 this.shape = "rectangle";
 	 this.paint = function (context){
 		 context.lineWidth= this.lineWidth;
 		 if (eraseOn){
@@ -32,6 +33,7 @@ function Circle (x,y,r,color,lineWidth,brushOn){
 	this.r=r;
 	this.color=color;
 	this.lineWidth=lineWidth;
+	this.shape = "circle";
 	this.paint=function (context){
 		context.lineWidth = this.lineWidth;
 	    if (brushOn){
