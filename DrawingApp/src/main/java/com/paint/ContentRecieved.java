@@ -1,8 +1,28 @@
 package com.paint;
 
 public class ContentRecieved {
-	private String content;
-	private int x, y, height,width, lineWidth;
+	private String shape;
+	private int x, y, height,width,r,lineWidth;
+	private ContentRecieved point1,point2;
+	
+	public ContentRecieved getPoint1() {
+		return point1;
+	}
+	public void setPoint1(ContentRecieved point1) {
+		this.point1 = point1;
+	}
+	public ContentRecieved getPoint2() {
+		return point2;
+	}
+	public void setPoint2(ContentRecieved point2) {
+		this.point2 = point2;
+	}
+	public int getR() {
+		return r;
+	}
+	public void setR(int r) {
+		this.r = r;
+	}
 	private String color;
 	
 	public int getX() {
@@ -42,17 +62,13 @@ public class ContentRecieved {
 		this.color = color;
 	}
 	
-	public String getContent() {
-		return content;
+
+	public String getShape() {
+		return shape;
 	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public ContentRecieved(){
-		this.content = "default message";
-	}
-	public ContentRecieved (String content){
-		this.content=content;
+	public void setShape(String shape) {
+		this.shape = shape;
 	}
 
+	public ContentRecieved(){}
 }

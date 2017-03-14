@@ -37,6 +37,7 @@ function Circle (x,y,r,color,lineWidth,brushOn){
 	this.paint=function (context){
 		context.lineWidth = this.lineWidth;
 	    if (brushOn){
+	    	this.shape ="brush";
 	    	context.beginPath();
 	    	context.arc(x, y, r, 0, 2 * Math.PI, false);
 	    	//context.closePath();
@@ -53,16 +54,16 @@ function Circle (x,y,r,color,lineWidth,brushOn){
 }
 
 //constructor for line 
-function Line (point1,point2,width,color){
+function Line (point1,point2,lineWidth,color,shape){
 	this.point1=point1;
 	this.point2=point2;
-	this.width=width;
+	this.lineWidth=lineWidth;
 	this.color=color;
-	
+	this.shape=shape;
 	this.paint=function(context){
 		point1.paint(context);
 		point2.paint(context);
-		context.lineWidth = this.width;
+		context.lineWidth = this.lineWidth;
 		context.beginPath();
 	    context.moveTo(this.point1.x, this.point1.y);
 	    context.lineTo(this.point2.x, this.point2.y);

@@ -75,8 +75,11 @@ c.addEventListener("mousemove",function(event){
 			var color = shapeColor;
 			var point1 = new Circle (initial_x,initial_y,radius,color,borderWidth,true);
 			var point2 = new Circle (x,y,radius,color,borderWidth,true);
-			selector = new Line (point1,point2,lineWidth,color);
-			shapes.push(selector);
+			selector = new Line (point1,point2,lineWidth,color,"brush");
+			if($("#connect").attr("disabled")=='disabled')
+				send(selector);
+			else 
+				shapes.push(selector);
 			initial_x = x;
 			initial_y = y;   
 		}
@@ -87,7 +90,9 @@ c.addEventListener("mousemove",function(event){
 			var radius = lineWidth /2;
 			var point1 = new Circle (initial_x,initial_y,radius,color,borderWidth,true);
 			var point2 = new Circle(x,y,radius,color,borderWidth,true);
-			selector = new Line(point1,point2,lineWidth,color);	
+			selector = new Line(point1,point2,lineWidth,color,"line");	
+			if($("#connect").attr("disabled")=='disabled')
+				send(selector);
 		}
 		if (selected =="eraser"){
 			var width= 10,
@@ -117,6 +122,8 @@ $('#clear').on('click', function (e){
 	ctx.clearRect(0,0,c.width,c.height);
 	shapes.splice(0,shapes.length);
 	image =null;
+	model = null;
+	selector= null;
 });
 $('#undo').on('click', function (e) {
 	shapes.pop();
