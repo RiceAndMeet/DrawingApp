@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Steven Yan">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	 <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+	<link rel="stylesheet" href="css/master.css">
+	<title>Painting App</title>
+</head>
+
+<body>
+	 <div id="toolbar">
+	 	<div id="lineWidth" class="col-md-1.5">
+	 		LineWidth <span id="lenval">10</span>
+	 		<div id="dlen" class="lencontrol">-</div>
+	 		<div id="ilen" class="lencontrol">+</div>	
+	 	</div>
+	 	<div class="btn-group col-md-4.5" id="nav_wrapper">
+	 	   <label class="btn btn-default btn-file">
+			 Import Image <input type="file" id="imageInput" accept="image/*" style="display: none;">
+		  </label>
+	 	   <button type="button" class="btn btn-primary" id="save">Save</button>
+		   <button type="button" class="btn btn-primary" id="undo">Undo</button>
+		   <button type="button" class="btn btn-primary" id="clear">Clear</button>
+	 	   
+	 	   <div class="btn-group">
+	 	   		<button id="dropdownMenuButton" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+		   		 Tools <span class="caret"></span></button>
+		   		 <div class="list-group dropdown-menu" aria-labelledby="dropdownMenuButton">
+					  <button type="button" class="btn btn-primary list-group-item dropdown-item" id="brush">Brush</button>
+					  <button type="button" class="btn btn-primary list-group-item dropdown-item" id="eraser">Eraser</button>
+		   		 </div>	
+	 	   </div>
+		  
+		  <div class="btn-group">
+		    <button id="dropdownMenuButton" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+		    Shapes <span class="caret"></span></button>
+		    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			    <button class="btn btn-primary dropdown-item list-group-item" id="rectangle">Rectangle</button>
+			    <button class="btn btn-primary dropdown-item list-group-item" id="circle">Circle</button>
+			    <button class="btn btn-primary dropdown-item list-group-item" id="line">Line</button>
+			</div>
+		  </div>
+		</div>
+		<div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="connect">WebSocket connection:</label>
+                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
+                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+                    </button>
+                </div>
+            </form>
+        </div>
+	 	<div id ="colors" class="col-md-3.5"></div>
+	 </div>
+	 
+	
+	 <canvas id="myCanvas" style="display: block">
+	 Your browser does not support the HTML5 canvas tag.</canvas>
+	 <iframe id="download" hidden="yes"></iframe>
+	 <script src="js/drawing.js"></script>
+	 <script src="js/shapes.js"></script>
+	 <script src="js/length.js"></script>
+	 <script src="js/colors.js"></script>
+	 <script src="js/save.js"></script>
+	 <script src="js/importImage.js"></script>
+	 <script src="js/socket.js"></script>
+</body>
+</html>
